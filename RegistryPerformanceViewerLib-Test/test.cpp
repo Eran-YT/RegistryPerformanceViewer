@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "..\RegistryPerformanceViewerLib\CounterNames.hpp"
+#include "../RegistryPerformanceViewerLib/CounterData.hpp"
 
 using namespace performance_data;
 
@@ -18,4 +19,10 @@ TEST(TestCounterNames, CounterNumber)
     for (const std::wstring& id : counter_names.counter_ids()) {
         std::wcout << id << L" - " << counter_names.counter_name(id) << std::endl;
     }
+}
+
+TEST(TestCounterData, Print)
+{
+    CounterData counter_data(L"230");
+    print(counter_data.instances());
 }

@@ -19,8 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CounterData.cpp" />
     <ClCompile Include="CounterNames.cpp" />
     <ClCompile Include="CounterNames.hpp" />
+    <ClCompile Include="PerfStructs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CounterData.hpp" />
+    <ClInclude Include="PerfStructs.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
