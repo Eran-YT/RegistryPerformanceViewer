@@ -1,7 +1,7 @@
 #include "pch.h"
 
-#include "..\RegistryPerformanceViewerLib\CounterNames.hpp"
-#include "../RegistryPerformanceViewerLib/CounterData.hpp"
+#include "RegistryPerformanceViewerLib/CounterNames.hpp"
+#include "RegistryPerformanceViewerLib/CounterData.hpp"
 
 using namespace performance_data;
 TEST(TestCounterNames, Process)
