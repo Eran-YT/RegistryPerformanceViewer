@@ -13,8 +13,10 @@ public:
     ~CounterNames() = default;
 
     [[nodiscard]] std::wstring counter_name(const std::wstring& counter_id) const;
+    [[nodiscard]] std::wstring counter_id(const std::wstring& counter_name) const;
 
     [[nodiscard]] std::set<std::wstring> counter_ids() const;
+    [[nodiscard]] std::set<std::wstring> counter_names() const;
 
     CounterNames(const CounterNames&) = default;
     CounterNames(CounterNames&&) = default;
