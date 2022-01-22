@@ -28,7 +28,7 @@ TEST(TestCounterData, Print)
 
 TEST(TestCounterData, OneCounter)
 {
-	const std::wstring counter_name = L"# of Exceps Thrown / sec";
+    const std::wstring counter_name = L"Browser";
 	const CounterNames counters;
 
 	const CounterData counter(counters.counter_id(counter_name));

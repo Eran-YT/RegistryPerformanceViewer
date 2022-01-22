@@ -32,6 +32,9 @@ private:
     [[nodiscard]] PerfInstance parse_instance(uint32_t& current_index,
                                               const std::vector<Counter>& counters_template) const;
 
+    [[nodiscard]] PerfInstance parse_single_instance(uint32_t& current_index,
+                                              const std::vector<Counter>& counters_template) const;
+
     [[nodiscard]] static std::vector<std::byte> get_counter_data(const std::wstring& counter_id);
 
     std::vector<std::byte> m_counter_data;
