@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
 #include <Windows.h>
 
 #include "PerfStructs.hpp"
@@ -14,7 +15,7 @@ public:
 
     ~CounterData() = default;
 
-    [[nodiscard]] PerfInstances instances() const;
+    [[nodiscard]] std::map<CounterName, PerfInstances> instances() const;
 
     CounterData(const CounterData&) = default;
     CounterData(CounterData&&) = default;

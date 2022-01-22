@@ -1,13 +1,16 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
 
 namespace performance_data
 {
 
+using CounterName = std::wstring;
+
 struct Counter final
 {
-    std::wstring name;
+    CounterName name;
     uint32_t counter_type;
     uint32_t counter_size;
     uint32_t counter_offset;
@@ -22,6 +25,6 @@ struct PerfInstance final
 
 using PerfInstances = std::vector<PerfInstance>;
 
-void print(const PerfInstances& instances);
+void print(const std::map<CounterName, PerfInstances>& instance_map);
 
 }
