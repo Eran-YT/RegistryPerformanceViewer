@@ -17,6 +17,18 @@ std::wstring CounterNames::counter_name(const std::wstring& counter_id) const
     return m_counter_names.at(counter_id);
 }
 
+std::wstring CounterNames::counter_id(const std::wstring& counter_name) const
+{
+    for (const auto& [key, value] : m_counter_names) {
+        if (value == counter_name) {
+            return key;
+        }
+    }
+
+    throw std::runtime_error("Failed to find counter ID");
+}
+
+
 std::set<std::wstring> CounterNames::counter_ids() const
 {
     // This is because ranges::to is not implemented yet in the STL
@@ -26,6 +38,17 @@ std::set<std::wstring> CounterNames::counter_ids() const
     }
 
     return keys;
+}
+
+std::set<std::wstring> CounterNames::counter_names() const
+{
+    // This is because ranges::to is not implemented yet in the STL
+    std::set<std::wstring> values;
+    for (const auto& value : m_counter_names | std::views::values) {
+        values.insert(value);
+    }
+
+    return values;
 }
 
 std::map<std::wstring, std::wstring> CounterNames::get_counter_names()

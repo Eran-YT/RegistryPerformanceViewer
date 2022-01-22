@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "registry-performance-viewer",
+  "version": "0.1.0",
+  "dependencies": [
+	"fast-cpp-csv-parser",
+    "cli11"
+  ]
+}
