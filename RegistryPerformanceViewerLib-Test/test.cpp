@@ -25,3 +25,14 @@ TEST(TestCounterData, Print)
 	const CounterData counter_data(L"230");
     print(counter_data.instances());
 }
+
+TEST(TestCounterData, OneCounter)
+{
+	const std::wstring counter_name = L"# of Exceps Thrown / sec";
+	const CounterNames counters;
+
+    CounterData counter(counters.counter_id(counter_name));
+
+    EXPECT_TRUE(!counter.instances().empty());
+
+}
