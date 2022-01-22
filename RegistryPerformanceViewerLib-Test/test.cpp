@@ -29,6 +29,6 @@ TEST(TestCounterData, OneCounter)
 
     const CounterData counter(counters.counter_id(counter_name));
 
-    EXPECT_TRUE(!counter.instances().empty());
+    EXPECT_FALSE(counter.instances().empty());
 
 }
