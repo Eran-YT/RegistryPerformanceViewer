@@ -28,6 +28,7 @@ std::map<CounterName, PerfInstances> CounterData::instances() const
             uint32_t current_index = current_object_index + object_type->HeaderLength;
             std::vector<Counter> counters = parse_counter_definitions(current_index, object_type);
 
+            PerfInstances instances;
             if (object_type->NumInstances != PERF_NO_INSTANCES) {
                 for (LONG current_instance = 0; current_instance < object_type->NumInstances; current_instance++) {
                     instances.push_back(parse_instance(current_index, counters));
@@ -72,8 +73,6 @@ std::map<CounterName, PerfInstances> CounterData::instances() const
     std::vector<Counter> CounterData::parse_counter_definitions(uint32_t& current_index,
         const PERF_OBJECT_TYPE* object_type) const
     {
-        static CounterNames counter_names;
-
         std::vector<Counter> counters;
         for (uint32_t current_counter = 0; current_counter < object_type->NumCounters; current_counter++) {
             const auto* counter_definition = reinterpret_cast<const PERF_COUNTER_DEFINITION*>(
