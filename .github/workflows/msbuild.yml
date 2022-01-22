@@ -44,5 +44,4 @@ jobs:
     - name: Test
       run: |
         cd x64\Release
-        dir
         .\RegistryPerformanceViewerLib-Test.exe
