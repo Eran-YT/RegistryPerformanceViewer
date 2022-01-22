@@ -29,8 +29,12 @@ std::map<CounterName, PerfInstances> CounterData::instances() const
         std::vector<Counter> counters = parse_counter_definitions(current_index, object_type);
 
         PerfInstances instances;
-        for (LONG current_instance = 0; current_instance < object_type->NumInstances; current_instance++) {
-            instances.push_back(parse_instance(current_index, counters));
+        if (object_type->NumInstances != PERF_NO_INSTANCES) {
+            for (LONG current_instance = 0; current_instance < object_type->NumInstances; current_instance++) {
+                instances.push_back(parse_instance(current_index, counters));
+            }
+        } else {
+            instances.push_back(parse_single_instance(current_index, counters));
         }
 
         CounterName counter_name = counter_names.counter_name(std::to_wstring(object_type->ObjectNameTitleIndex));
@@ -88,7 +92,7 @@ std::vector<Counter> CounterData::parse_counter_definitions(uint32_t& current_in
     return counters;
 }
 
-PerfInstance CounterData::parse_instance(uint32_t& current_index, 
+PerfInstance CounterData::parse_instance(uint32_t& current_index,
                                          const std::vector<Counter>& counters_template) const
 {
     const auto* instance_definition = reinterpret_cast<const PERF_INSTANCE_DEFINITION*>(m_counter_data.data() + current_index);
@@ -100,6 +104,21 @@ PerfInstance CounterData::parse_instance(uint32_t& current_index,
 
     PerfInstance instance{
         .name = instance_name,
+        .counters = parse_counter_block(counter_block, counters_template)
+    };
+
+    current_index += counter_block->ByteLength;
+
+    return instance;
+}
+
+PerfInstance CounterData::parse_single_instance(uint32_t& current_index,
+                                                const std::vector<Counter>& counters_template) const
+{
+    const auto* counter_block = reinterpret_cast<const PERF_COUNTER_BLOCK*>(m_counter_data.data() + current_index);
+
+    PerfInstance instance{
+        .name = L"noname",
         .counters = parse_counter_block(counter_block, counters_template)
     };
 
