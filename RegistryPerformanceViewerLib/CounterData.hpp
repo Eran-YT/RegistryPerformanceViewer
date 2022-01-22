@@ -10,7 +10,7 @@ namespace performance_data
 class CounterData final
 {
 public:
-    CounterData(const std::wstring& counter_id);
+	explicit CounterData(const std::wstring& counter_id);
 
     ~CounterData() = default;
 

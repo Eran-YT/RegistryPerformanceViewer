@@ -5,7 +5,7 @@
 namespace performance_data
 {
 
-struct Counter
+struct Counter final
 {
     std::wstring name;
     uint32_t counter_type;
@@ -14,7 +14,7 @@ struct Counter
     uint64_t counter_data;
 };
 
-struct PerfInstance
+struct PerfInstance final
 {
     std::wstring name;
     std::vector<Counter> counters;
