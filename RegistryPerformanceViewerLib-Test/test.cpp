@@ -14,10 +14,6 @@ TEST(TestCounterNames, CounterNumber)
 {
     const CounterNames counter_names;
     EXPECT_GT(counter_names.counter_ids().size(), 1000);
-
-    for (const std::wstring& id : counter_names.counter_ids()) {
-        std::wcout << id << L" - " << counter_names.counter_name(id) << std::endl;
-    }
 }
 
 TEST(TestCounterData, Print)

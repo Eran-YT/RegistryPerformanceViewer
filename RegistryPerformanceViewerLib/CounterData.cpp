@@ -8,14 +8,16 @@
 namespace performance_data
 {
 
-    CounterData::CounterData(const std::wstring& counter_id) :
-        m_counter_data(get_counter_data(counter_id))
-    {
-    }
+CounterNames counter_names;
 
-    PerfInstances CounterData::instances() const
-    {
-        PerfInstances instances;
+CounterData::CounterData(const std::wstring& counter_id) :
+    m_counter_data(get_counter_data(counter_id))
+{
+}
+
+std::map<CounterName, PerfInstances> CounterData::instances() const
+{
+    std::map<CounterName, PerfInstances> instance_map;
 
         const auto* perf_data_block = reinterpret_cast<const PERF_DATA_BLOCK*>(m_counter_data.data());
 
@@ -34,11 +36,14 @@ namespace performance_data
                 instances.push_back(parse_single_instance(current_index, counters));
             }
 
-            current_object_index += object_type->TotalByteLength;
-        }
+        CounterName counter_name = counter_names.counter_name(std::to_wstring(object_type->ObjectNameTitleIndex));
+        instance_map[counter_name] = instances;
 
-        return instances;
+        current_object_index += object_type->TotalByteLength;
     }
+
+    return instance_map;
+}
 
     std::vector<Counter> CounterData::parse_counter_block(const PERF_COUNTER_BLOCK* counter_block,
         const std::vector<Counter>& counters_template)
