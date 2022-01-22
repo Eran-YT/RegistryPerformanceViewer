@@ -47,14 +47,14 @@ std::map<CounterName, PerfInstances> CounterData::instances() const
 }
 
 std::vector<Counter> CounterData::parse_counter_block(const PERF_COUNTER_BLOCK* counter_block,
-    const std::vector<Counter>& counters_template)
+                                                      const std::vector<Counter>& counters_template)
 {
     std::vector<Counter> current_counters = counters_template;
     const char* counter_block_start = reinterpret_cast<const char*>(counter_block);
 
     for (Counter& current_counter : current_counters) {
         const void* counter_data_address = reinterpret_cast<const void*>(counter_block_start +
-            current_counter.counter_offset);
+                                                                         current_counter.counter_offset);
 
         if (current_counter.counter_size == 4) {
             const auto* counter_data = reinterpret_cast<const uint32_t*>(counter_data_address);
@@ -71,7 +71,7 @@ std::vector<Counter> CounterData::parse_counter_block(const PERF_COUNTER_BLOCK* 
 }
 
 std::vector<Counter> CounterData::parse_counter_definitions(uint32_t& current_index,
-    const PERF_OBJECT_TYPE* object_type) const
+                                                            const PERF_OBJECT_TYPE* object_type) const
 {
     std::vector<Counter> counters;
     for (uint32_t current_counter = 0; current_counter < object_type->NumCounters; current_counter++) {
@@ -93,7 +93,7 @@ std::vector<Counter> CounterData::parse_counter_definitions(uint32_t& current_in
 }
 
 PerfInstance CounterData::parse_instance(uint32_t& current_index,
-    const std::vector<Counter>& counters_template) const
+                                         const std::vector<Counter>& counters_template) const
 {
     const auto* instance_definition = reinterpret_cast<const PERF_INSTANCE_DEFINITION*>(m_counter_data.data() + current_index);
     std::wstring instance_name(reinterpret_cast<const wchar_t*>(instance_definition) + (instance_definition->NameOffset / sizeof(wchar_t)));
@@ -113,7 +113,7 @@ PerfInstance CounterData::parse_instance(uint32_t& current_index,
 }
 
 PerfInstance CounterData::parse_single_instance(uint32_t& current_index,
-    const std::vector<Counter>& counters_template) const
+                                                const std::vector<Counter>& counters_template) const
 {
     const auto* counter_block = reinterpret_cast<const PERF_COUNTER_BLOCK*>(m_counter_data.data() + current_index);
 
@@ -138,11 +138,11 @@ std::vector<std::byte> CounterData::get_counter_data(const std::wstring& counter
     do {
         data.resize(dwBufferSize);
         status = RegQueryValueExW(HKEY_PERFORMANCE_DATA,
-            counter_id.data(),
-            NULL,
-            NULL,
-            reinterpret_cast<LPBYTE>(data.data()),
-            &dwSize);
+                                  counter_id.data(),
+                                  NULL,
+                                  NULL,
+                                  reinterpret_cast<LPBYTE>(data.data()),
+                                  &dwSize);
 
         // Contents of dwSize is unpredictable if RegQueryValueEx fails, which is why
         // you need to increment dwBufferSize and use it to set dwSize.
