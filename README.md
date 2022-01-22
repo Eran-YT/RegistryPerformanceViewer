@@ -13,14 +13,16 @@ RegistryPerformanceViewer.exe -help
 RegistryPerformanceViewer.exe list
 ``` 
 
-
 ### Dump specific counter
 ```cmd
-RegistryPerformanceViewer.exe dump Process
+RegistryPerformanceViewer.exe dump -c Process -c output_directory
 ``` 
-
 
 ### Dump all counters
 ```cmd
 RegistryPerformanceViewer.exe dump_all
+``` 
+You may specify the output directory like so:
+```cmd
+RegistryPerformanceViewer.exe dump_all -o output_directory
 ``` 
