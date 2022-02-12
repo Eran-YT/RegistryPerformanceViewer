@@ -12,9 +12,25 @@ CounterNames::CounterNames() :
 {
 }
 
-std::wstring CounterNames::counter_name(const std::wstring& counter_id) const
+std::wstring CounterNames::counter_name(const std::wstring& counter_id, uint32_t counter_type) const
 {
-    return m_counter_names.at(counter_id);
+    switch (counter_type) {
+    case PERF_AVERAGE_BASE:
+        return L"PERF_AVERAGE_BASE";
+    case PERF_COUNTER_MULTI_BASE:
+        return L"PERF_COUNTER_MULTI_BASE";
+    case PERF_LARGE_RAW_BASE:
+        return L"PERF_LARGE_RAW_BASE";
+    case PERF_RAW_BASE:
+        return L"PERF_RAW_BASE";
+    case PERF_SAMPLE_BASE:
+        return L"PERF_SAMPLE_BASE";
+    default:
+        if (!m_counter_names.contains(counter_id)) {
+            return L"counter name not found";
+        }
+        return m_counter_names.at(counter_id);
+    }
 }
 
 std::wstring CounterNames::counter_id(const std::wstring& counter_name) const

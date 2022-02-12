@@ -152,9 +152,11 @@
   <ItemGroup>
     <ClCompile Include="RegistryPerformanceViewer.cpp" />
     <ClCompile Include="RegistryPerformanceViewerLogic.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RegistryPerformanceViewerLogic.hpp" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RegistryPerformanceViewerLib\RegistryPerformanceViewerLib.vcxproj">

@@ -79,7 +79,7 @@ std::vector<Counter> CounterData::parse_counter_definitions(uint32_t& current_in
             m_counter_data.data() + current_index);
 
         Counter counter{
-            .name = counter_names.counter_name(std::to_wstring(counter_definition->CounterNameTitleIndex)),
+            .name = counter_names.counter_name(std::to_wstring(counter_definition->CounterNameTitleIndex), counter_definition->CounterType),
             .counter_type = counter_definition->CounterType,
             .counter_size = counter_definition->CounterSize,
             .counter_offset = counter_definition->CounterOffset,
