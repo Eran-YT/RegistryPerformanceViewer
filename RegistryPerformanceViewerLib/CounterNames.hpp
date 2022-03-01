@@ -14,7 +14,7 @@ public:
     CounterNames();
     ~CounterNames() = default;
 
-    [[nodiscard]] std::wstring counter_name(const std::wstring& counter_id) const;
+    [[nodiscard]] std::wstring counter_name(const std::wstring& counter_id, uint32_t counter_type = 0) const;
     [[nodiscard]] std::wstring counter_id(const std::wstring& counter_name) const;
 
     [[nodiscard]] std::set<std::wstring> counter_ids() const;
